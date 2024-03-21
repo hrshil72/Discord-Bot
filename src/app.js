@@ -1,6 +1,11 @@
 import "dotenv/config";
 
-import { Client, GatewayIntentBits, EmbedBuilder } from "discord.js";
+import {
+  Client,
+  GatewayIntentBits,
+  EmbedBuilder,
+  ActivityType,
+} from "discord.js";
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -10,8 +15,27 @@ const client = new Client({
   ],
 });
 
+let status = [
+  {
+    name: "Netflix",
+    type: ActivityType.Watching,
+    url: "https://www.netflix.com/browse",
+  },
+  {
+    name: "Youtube",
+    type: ActivityType.Streaming,
+    url: "https://www.youtube.com/watch?v=OqxHy8sCtvA&list=PLpmb-7WxPhe0ZVpH9pxT5MtC4heqej8Es&index=6",
+  },
+];
+
 client.on("ready", (e) => {
   console.log(`${e.user.username} is online`);
+
+  setInterval(() => {
+    let random = Math.floor(Math.random() * status.length);
+
+    client.user.setActivity(status[random]);
+  }, 10000);
 });
 
 client.on("messageCreate", (message) => {
@@ -66,11 +90,14 @@ client.on("interactionCreate", async (interaction) => {
         value: "Some value here",
         inline: true,
       })
-      .setImage("https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visual-studio-code-icon.png")
+      .setImage(
+        "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visual-studio-code-icon.png"
+      )
       .setTimestamp()
       .setFooter({
         text: "Some footer text here",
-        iconURL: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visual-studio-code-icon.png",
+        iconURL:
+          "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visual-studio-code-icon.png",
       });
 
     interaction.reply({ embeds: [embed] });
