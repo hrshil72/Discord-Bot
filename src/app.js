@@ -100,7 +100,7 @@ client.on("interactionCreate", async (interaction) => {
           "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visual-studio-code-icon.png",
       });
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   }
 });
 
