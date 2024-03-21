@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import { REST, Routes } from "discord.js";
+import { ApplicationCommandOptionType, REST, Routes } from "discord.js";
 
 const commands = [
   {
@@ -10,6 +10,42 @@ const commands = [
   {
     name: "ping",
     description: "Replies with pong!",
+  },
+  {
+    name: "add",
+    description: "Adds two numbers",
+    options: [
+      {
+        name: "first-number",
+        description: "Enter first number",
+        type: ApplicationCommandOptionType.Number,
+        choices: [
+          {
+            name: "one",
+            value: 1,
+          },
+          {
+            name: "two",
+            value: 2,
+          },
+          {
+            name: "three",
+            value: 3,
+          },
+          {
+            name: "four",
+            value: 4,
+          },
+        ],
+        required: true,
+      },
+      {
+        name: "second-number",
+        description: "Enter second number",
+        type: ApplicationCommandOptionType.Number,
+        required: true,
+      },
+    ],
   },
 ];
 
